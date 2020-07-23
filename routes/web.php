@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,5 +35,3 @@ Route::resource('products.carts', 'ProductCartController')->only(['store', 'dest
 Route::resource('orders.payments', 'OrderPaymentController')->only(['create', 'store']);
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
