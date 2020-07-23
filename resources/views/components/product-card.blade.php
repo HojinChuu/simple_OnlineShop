@@ -6,10 +6,18 @@
         <p class="card-text">{{ $product->description }}</p>
         <p class="card-text"><strong>{{ $product->stock }}</strong> left</p>
 
-        <form action="{{ route('products.carts.store', ['product' => $product->id]) }}" class="d-inline" method="post">
-            @csrf
-            <button type="submit" class="btn btn-success">Add to Cart</button>
-        </form>
+        @if (isset($cart))
+            <form action="{{ route('products.carts.destroy', ['product' => $product->id, 'cart' => $cart->id]) }}" class="d-inline" method="post">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-warning">Remove From Cart</button>
+            </form>
+        @else
+            <form action="{{ route('products.carts.store', ['product' => $product->id]) }}" class="d-inline" method="post">
+                @csrf
+                <button type="submit" class="btn btn-success">Add to Cart</button>
+            </form>
+        @endif
     </div>
 </div>
 
