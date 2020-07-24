@@ -24,7 +24,7 @@ Route::get('/', 'MainController@index')->name('main');
 // Route::match( ['put', 'patch'], 'products/{product}', 'ProductController@update')->name('products.update'); 
 // Route::delete('products/{product}', 'ProductController@destroy')->name('products.destroy'); 
 
-Route::resource('products', 'ProductController');
+// Route::resource('products', 'ProductController');
 
 Route::resource('carts', 'CartController')->only(['index']);
 
