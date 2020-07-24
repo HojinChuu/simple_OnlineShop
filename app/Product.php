@@ -10,6 +10,12 @@ use App\Scopes\AvailableScope;
 
 class Product extends Model
 {
+    protected $table = 'products';
+
+    protected $with = [
+        'images'
+    ];
+    
     protected $fillable = [
         'title',
         'description',

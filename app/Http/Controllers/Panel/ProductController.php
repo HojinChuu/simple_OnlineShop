@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Panel;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
-use App\Product;
+use App\PanelProduct;
 use App\Scopes\AvailableScope;
 
 class ProductController extends Controller
@@ -17,7 +17,7 @@ class ProductController extends Controller
 
     public function index() 
     {
-        $products = Product::withoutGlobalScope(AvailableScope::class)->get();
+        $products = PanelProduct::without('images')->get();
 
         return view('products.index')->with([
             'products' => $products
@@ -51,7 +51,7 @@ class ProductController extends Controller
         // }
         // session()->forget('error');
 
-        $product = Product::create($request->validated());
+        $product = PanelProduct::create($request->validated());
 
         // session()->flash('success', "New product with id {$product->id} was created");
 
@@ -62,7 +62,7 @@ class ProductController extends Controller
 
     }
 
-    public function show(Product $product) 
+    public function show(PanelProduct $product) 
     {
         // $product = Product::where('id', '=', $product)->get();
         // $product = Product::where('id', $product)->first();
@@ -76,14 +76,14 @@ class ProductController extends Controller
 
     public function edit($product)
     {
-        $product = Product::findOrFail($product);
+        $product = PanelProduct::findOrFail($product);
         
         return view('products.edit')->with([
             'product' => $product
         ]);
     }
 
-    public function update(ProductRequest $request, Product $product)
+    public function update(ProductRequest $request, PanelProduct $product)
     {
         $product->update($request->validated());
 
@@ -94,7 +94,7 @@ class ProductController extends Controller
 
     public function destroy($product)
     {
-        $product = Product::findOrFail($product);
+        $product = PanelProduct::findOrFail($product);
         $product->delete();
 
         return redirect()
